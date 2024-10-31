@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://cx4csia4gu1v"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_umdgq"]
+[ext_resource type="PackedScene" uid="uid://dgevabc1ck0k" path="res://scenes/Components/AttackComponent.tscn" id="2_j3v5m"]
+[ext_resource type="PackedScene" uid="uid://c8qpiljh0ofg3" path="res://scenes/Components/HealthComponent.tscn" id="3_7dcwy"]
+[ext_resource type="PackedScene" uid="uid://dmls14ldp2hfg" path="res://scenes/Components/MovementComponent.tscn" id="3_y55ru"]
+[ext_resource type="Texture2D" uid="uid://de3qs5wgpuxu7" path="res://assets/Orc-Idle.png" id="4_fjkci"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xl5xs"]
+size = Vector2(15, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsi22"]
+atlas = ExtResource("4_fjkci")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55a1q"]
+atlas = ExtResource("4_fjkci")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2m55"]
+atlas = ExtResource("4_fjkci")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_juajw"]
+atlas = ExtResource("4_fjkci")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1j2wk"]
+atlas = ExtResource("4_fjkci")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewcmg"]
+atlas = ExtResource("4_fjkci")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6wpcm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsi22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55a1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2m55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_juajw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1j2wk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewcmg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(100, 100)
+collision_mask = 2
+script = ExtResource("1_umdgq")
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("2_j3v5m")]
+AttackAreaSize = 0.4
+Character = NodePath("..")
+metadata/_edit_group_ = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_7dcwy")]
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("3_y55ru")]
+Character = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xl5xs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.9881, 1)
+sprite_frames = SubResource("SpriteFrames_6wpcm")
+frame_progress = 0.589063
+metadata/_edit_group_ = true

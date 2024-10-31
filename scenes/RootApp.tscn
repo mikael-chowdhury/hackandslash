@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://nmw7e677clnc"]
+
+[ext_resource type="PackedScene" uid="uid://bvbsxxa3h2e0a" path="res://scenes/GameScene.tscn" id="1_r3qop"]
+[ext_resource type="PackedScene" uid="uid://bpk4ixjy1mq6q" path="res://scenes/UI/HUD.tscn" id="2_3jpe4"]
+
+[node name="RootApp" type="Node2D"]
+
+[node name="GameScene" parent="." instance=ExtResource("1_r3qop")]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="GUI" instance=ExtResource("2_3jpe4")]

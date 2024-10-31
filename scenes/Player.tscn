@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=3 uid="uid://cj5o4gqaak582"]
+
+[ext_resource type="Script" path="res://scripts/Player/Player.cs" id="1_3if53"]
+[ext_resource type="PackedScene" uid="uid://dgevabc1ck0k" path="res://scenes/Components/AttackComponent.tscn" id="2_bfjra"]
+[ext_resource type="PackedScene" uid="uid://dmls14ldp2hfg" path="res://scenes/Components/MovementComponent.tscn" id="3_lqgul"]
+[ext_resource type="PackedScene" uid="uid://c8qpiljh0ofg3" path="res://scenes/Components/HealthComponent.tscn" id="3_srkid"]
+[ext_resource type="Texture2D" uid="uid://clyp2vdo10ecy" path="res://assets/Soldier-Idle.png" id="4_jb6mk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xl5xs"]
+size = Vector2(15.78, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2kje"]
+atlas = ExtResource("4_jb6mk")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcqya"]
+atlas = ExtResource("4_jb6mk")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tejxc"]
+atlas = ExtResource("4_jb6mk")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srbww"]
+atlas = ExtResource("4_jb6mk")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ncc3"]
+atlas = ExtResource("4_jb6mk")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swim7"]
+atlas = ExtResource("4_jb6mk")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6wpcm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2kje")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcqya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tejxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srbww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ncc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swim7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AttackComponent", "MovementComponent")]
+collision_mask = 2
+script = ExtResource("1_3if53")
+AttackComponent = NodePath("AttackComponent")
+MovementComponent = NodePath("MovementComponent")
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("2_bfjra")]
+Character = NodePath("..")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_srkid")]
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("3_lqgul")]
+Character = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.16, 0.36)
+shape = SubResource("RectangleShape2D_xl5xs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.77, 2.36)
+sprite_frames = SubResource("SpriteFrames_6wpcm")
+frame_progress = 0.589063
